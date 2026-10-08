@@ -1,0 +1,6 @@
+{
+  "name": "AURA Aromática | Velones & Fragancias POS & Web",
+  "description": "Tienda en Línea y Terminal Punto de Venta POS de velones artesanales, velas botánicas e inciensos con inventario sincronizado en tiempo real en Firebase Firestore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

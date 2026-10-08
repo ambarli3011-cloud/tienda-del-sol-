@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Artículos del inventario compartido entre POS y Tienda Online.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sku": { "type": "string" },
+        "barcode": { "type": "string" },
+        "name": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "costPrice": { "type": "number" },
+        "stock": { "type": "number" },
+        "minStockAlert": { "type": "number" },
+        "image": { "type": "string" },
+        "isOnline": { "type": "boolean" },
+        "isPos": { "type": "boolean" },
+        "featured": { "type": "boolean" }
+      },
+      "required": ["id", "sku", "name", "price", "stock", "category"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Ventas y órdenes registradas en terminal POS o Tienda Online.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "channel": { "type": "string", "enum": ["pos", "online"] },
+        "subtotal": { "type": "number" },
+        "tax": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "channel", "total", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Catálogo central de inventario compartido en tiempo real."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Historial de transacciones de caja registradora y compras web."
+    }
+  }
+}

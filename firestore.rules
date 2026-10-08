@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Permite lectura y escritura de productos para el inventario sincronizado de tienda y POS
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isValidId(productId);
+    }
+
+    // Permite lectura y creación de órdenes desde el mostrador (POS) y desde la tienda en línea
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create: if isValidId(orderId);
+      allow update, delete: if isValidId(orderId);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
